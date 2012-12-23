@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<GRAMMAR LANGID = "409">
+<DEFINE>
+<ID NAME = "CMD" VAL="10"/>
+<ID NAME = "CMDOPEN" VAL="101"/>
+<ID NAME = "CMDLEFT" VAL="1011"/>
+<ID NAME = "CMDRIGHT" VAL="1012"/>
+<ID NAME = "CMDFORWARD" VAL="1013"/>
+</DEFINE>
+<RULE NAME ="COMMANDOPEN" ID = "CMDOPEN" TOPLEVEL = "ACTIVE">
+<L>
+<P>Open</P>
+</L>
+</RULE>
+<RULE NAME ="COMMAND" ID = "CMD" TOPLEVEL = "ACTIVE">
+<L>
+<P>Stop</P>
+</L>
+</RULE>
+<RULE NAME ="COMMANDLEFT" ID = "CMDLEFT" TOPLEVEL = "ACTIVE">
+<L>
+<P>Left</P>
+<P>Turn left</P>
+</L>
+</RULE>
+<RULE NAME ="COMMANDRIGHT" ID = "CMDRIGHT" TOPLEVEL = "ACTIVE">
+<L>
+<P>Right</P>
+<P>Turn right</P>
+</L>
+</RULE>
+<RULE NAME ="COMMANDFORWARD" ID = "CMDFORWARD" TOPLEVEL = "ACTIVE">
+<L>
+<P>Forward</P>
+<P>Move</P>
+<P>Move Forward</P>
+</L>
+</RULE>
+</GRAMMAR>
