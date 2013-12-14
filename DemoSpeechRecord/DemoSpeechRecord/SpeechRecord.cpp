@@ -15,7 +15,7 @@ int SetWaveFormat(WAVEFORMATEX* wf,int wFormatTag,int nChannels,int nSamplesPerS
 	wf->nBlockAlign = nBlockAlign;
 	wf->wBitsPerSample = wBitsPerSample;
 	wf->cbSize = cbSize;
-	wf->nAvgBytesPerSec = nSamplesPerSec * wBitsPerSample / 8;
+	wf->nAvgBytesPerSec = nChannels * nSamplesPerSec * wBitsPerSample / 8;
 	
 	// IAudioClient *pIAudioClient = NULL;
 	//res = pIAudioClient->IsFormatSupported( AUDCLNT_SHAREMODE_EXCLUSIVE, (const PWAVEFORMATEX)wf, NULL);
@@ -52,7 +52,7 @@ int OpenWaveIn(HWAVEIN* hWaveIn, WAVEFORMATEX* wf)
 	res = waveInOpen(hWaveIn,WAVE_MAPPER, wf, (DWORD)NULL,0L,CALLBACK_WINDOW); 
 	if ( res != MMSYSERR_NOERROR )
 	{
-		sprintf(lpTemp, "Open wave input channel FAILED��Error_Code = 0x%x", res );
+		sprintf(lpTemp, "Open wave input channel FAILED, rror_Code = 0x%x", res );
 	    _debug_print(lpTemp,1);
 	   return -1;
 	}
@@ -81,7 +81,7 @@ int PrepareWaveIn(HWAVEIN* hWaveIn, WAVEHDR* waveHeader, DWORD dataSize)
 	res = waveInPrepareHeader( *hWaveIn, waveHeader, sizeof(WAVEHDR) ); 
 	if ( res != MMSYSERR_NOERROR)
 	{
-		sprintf(lpTemp, "Cannot prepare wave in header��Error_Code = 0x%03X", res );
+		sprintf(lpTemp, "Cannot prepare wave in header, ror_Code = 0x%03X", res );
 		_debug_print(lpTemp,1);
 		return -1;
 	}
@@ -93,7 +93,7 @@ int PrepareWaveIn(HWAVEIN* hWaveIn, WAVEHDR* waveHeader, DWORD dataSize)
 	res = waveInAddBuffer( *hWaveIn, waveHeader, sizeof(WAVEHDR) );
 	if ( res != MMSYSERR_NOERROR) 
 	{
-		sprintf(lpTemp, "Cannot add buffer for wave in��Error_Code = 0x%03X", res );
+		sprintf(lpTemp, "Cannot add buffer for wave in, ror_Code = 0x%03X", res );
 		_debug_print(lpTemp,1);
 		return -1;
 	}
