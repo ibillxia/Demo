@@ -52,7 +52,7 @@ int OpenWaveIn(HWAVEIN* hWaveIn, WAVEFORMATEX* wf)
 	res = waveInOpen(hWaveIn,WAVE_MAPPER, wf, (DWORD)NULL,0L,CALLBACK_WINDOW); 
 	if ( res != MMSYSERR_NOERROR )
 	{
-		sprintf(lpTemp, "Open wave input channel FAILED£¬Error_Code = 0x%x", res );
+		sprintf(lpTemp, "Open wave input channel FAILEDï¿½ï¿½Error_Code = 0x%x", res );
 	    _debug_print(lpTemp,1);
 	   return -1;
 	}
@@ -81,7 +81,7 @@ int PrepareWaveIn(HWAVEIN* hWaveIn, WAVEHDR* waveHeader, DWORD dataSize)
 	res = waveInPrepareHeader( *hWaveIn, waveHeader, sizeof(WAVEHDR) ); 
 	if ( res != MMSYSERR_NOERROR)
 	{
-		sprintf(lpTemp, "Cannot prepare wave in header£¬Error_Code = 0x%03X", res );
+		sprintf(lpTemp, "Cannot prepare wave in headerï¿½ï¿½Error_Code = 0x%03X", res );
 		_debug_print(lpTemp,1);
 		return -1;
 	}
@@ -93,7 +93,7 @@ int PrepareWaveIn(HWAVEIN* hWaveIn, WAVEHDR* waveHeader, DWORD dataSize)
 	res = waveInAddBuffer( *hWaveIn, waveHeader, sizeof(WAVEHDR) );
 	if ( res != MMSYSERR_NOERROR) 
 	{
-		sprintf(lpTemp, "Cannot add buffer for wave in£¬Error_Code = 0x%03X", res );
+		sprintf(lpTemp, "Cannot add buffer for wave inï¿½ï¿½Error_Code = 0x%03X", res );
 		_debug_print(lpTemp,1);
 		return -1;
 	}
@@ -178,7 +178,7 @@ int SaveRecordtoFile(const char* fileName, WAVEFORMATEX* wf, HWAVEIN* hWaveIn, W
 	dwNumber = FCC("RIFF");
 	WriteFile(FileHandle, &dwNumber, 4, &NumToWrite, NULL);
 
-	dwNumber = waveHeader->dwBytesRecorded + 18 + 20;
+	dwNumber = waveHeader->dwBytesRecorded + 12 + sizeof(WAVEFORMATEX) + 18 + 8;
 	WriteFile(FileHandle, &dwNumber, 4, &NumToWrite, NULL);
 
 	dwNumber = FCC("WAVE");
@@ -187,7 +187,7 @@ int SaveRecordtoFile(const char* fileName, WAVEFORMATEX* wf, HWAVEIN* hWaveIn, W
 	dwNumber = FCC("fmt ");
 	WriteFile(FileHandle, &dwNumber, 4, &NumToWrite, NULL);
 
-	dwNumber = 18L;
+	dwNumber = sizeof(WAVEFORMATEX);
 	WriteFile(FileHandle, &dwNumber, 4, &NumToWrite, NULL);
 
 	WriteFile(FileHandle, wf, sizeof(WAVEFORMATEX), &NumToWrite, NULL);
