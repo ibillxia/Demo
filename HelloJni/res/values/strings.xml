@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">HelloJni</string>
+	
+	<string name="hints">请输入两个整数</string>
+	<string name="btn_cal">计算</string>
+	
+</resources>
