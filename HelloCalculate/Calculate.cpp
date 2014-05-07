@@ -28,12 +28,22 @@ int cal_sub(int a,int b){
 }
 
 int cal_mul(int a,int b){
-	if(a>0 && INT_MAX/a<b){ // 上溢
-		alert(ERR_UP_OVERFLOW,__LINE__,__FILE__);
-		exit(1);
-	}else if(a<0 && INT_MIN/a>b){ // 下溢
-		alert(ERR_DOWN_OVERFLOW,__LINE__,__FILE__);
-		exit(1);
+	if(a>0 ){
+		if(INT_MAX/a<b){ // 上溢
+			alert(ERR_UP_OVERFLOW,__LINE__,__FILE__);
+			exit(1);
+		}else if(INT_MIN/a>b){ // 下溢
+			alert(ERR_DOWN_OVERFLOW,__LINE__,__FILE__);
+			exit(1);
+		}
+	}else if(a<0){
+		if(INT_MIN/a<b){ // 下溢
+			alert(ERR_DOWN_OVERFLOW,__LINE__,__FILE__);
+			exit(1);
+		} else if(INT_MAX/a>b){ // 上溢
+			alert(ERR_UP_OVERFLOW,__LINE__,__FILE__);
+			exit(1);
+		}
 	}
 	return a*b;
 }
