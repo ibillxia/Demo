@@ -30,7 +30,8 @@ public class HelloJni extends Activity {
 				int b = Integer.parseInt(tv2.getText().toString());
 				HelloCal cal = new HelloCal();
 				int c = cal.helloAdd(a,b);
-				tv3.setText("计算结果为： " + Integer.toString(c));
+				String str = cal.helloSay();  
+				tv3.setText(str + Integer.toString(c));
 			}
         });
     }
